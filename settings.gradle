@@ -4,6 +4,7 @@ def sensorDir = "$includeDir/osh-addons/sensors"
 def persistenceDir = "$includeDir/osh-addons/persistence"
 def processDir = "$includeDir/osh-addons/processing"
 def serviceDir = "$includeDir/osh-addons/services"
+def commDir = "$includeDir/osh-addons/comm"
 
 def toolsDir = "$rootDir/tools"
 
@@ -15,6 +16,26 @@ includeBuild gradle.oshCoreDir
 include 'sensorhub-test'
 project(':sensorhub-test').projectDir = "$toolsDir/sensorhub-test" as File
 
+include 'sensorhub-service-video'
+project(':sensorhub-service-video').projectDir = "$serviceDir/sensorhub-service-video" as File
+
+include 'sensorhub-driver-videocam'
+project(':sensorhub-driver-videocam').projectDir = "$sensorDir/video/sensorhub-driver-videocam" as File
+
+//include 'sensorhub-driver-gps-nmea'
+//project(':sensorhub-driver-gps-nmea').projectDir = "$sensorDir/positioning/sensorhub-driver-gps-nmea" as File
+
+include 'sensorhub-driver-bno055'
+project(':sensorhub-driver-bno055').projectDir = "$sensorDir/positioning/sensorhub-driver-bno055" as File
+
+include 'sensorhub-driver-v4l'
+project(':sensorhub-driver-v4l').projectDir = "$sensorDir/video/sensorhub-driver-v4l" as File
+
+include 'sensorhub-comm-dio'
+project(':sensorhub-comm-dio').projectDir = "$commDir/sensorhub-comm-dio" as File
+
+include 'sensorhub-comm-rxtx'
+project(':sensorhub-comm-rxtx').projectDir = "$commDir/sensorhub-comm-rxtx" as File
 
 // osh-storage
 //include '[storage-module-name]'
@@ -53,7 +74,7 @@ project(':sensorhub-test').projectDir = "$toolsDir/sensorhub-test" as File
 FileTree subprojects = fileTree("$rootDir/sensors").include('**/build.gradle')
 subprojects.files.each { File f ->
     File projectFolder = f.parentFile
-    if (projectFolder != rootDir) {
+    if (!projectFolder.name.contains("template")) {
         String projectName = ':' + projectFolder.name
         include projectName
         project(projectName).projectDir = projectFolder

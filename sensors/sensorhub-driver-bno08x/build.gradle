@@ -1,0 +1,44 @@
+description = 'BNO08X Orientation Sensor'
+ext.details = 'Driver for BNO08X absolute orientation sensor'
+version = '1.0.0'
+
+dependencies {
+  implementation 'org.sensorhub:sensorhub-core:' + oshCoreVersion
+  implementation "com.pi4j:pi4j-core:2.7.0"
+  implementation "com.pi4j:pi4j-plugin-raspberrypi:2.7.0"
+  implementation 'com.pi4j:pi4j-plugin-pigpio:2.7.0'
+  implementation 'com.pi4j:pi4j-plugin-linuxfs:2.7.0'
+  testImplementation project(':sensorhub-comm-rxtx')
+}
+
+// exclude tests requiring connection to the sensor
+// these have to be run manually
+test {
+  exclude '**/TestBno08xDriverRxtx.class'
+}
+
+// add info to OSGi manifest
+osgi {
+  manifest {
+    attributes('Bundle-Vendor': 'Botts Innovative Research, Inc.')
+    attributes('Bundle-Activator': 'org.sensorhub.impl.sensor.bno055.Activator')
+  }
+}
+
+// add info to maven pom
+ext.pom >>= {
+  developers {
+    developer {
+      id 'labutler'
+      name 'Lee Butler'
+      organization 'Botts Innovative Research, Inc.'
+      organizationUrl 'http://www.botts-inc.com' 
+    }
+    developer {
+      id 'alexrobin'
+      name 'Alex Robin'
+      organization 'Sensia Software LLC'
+      organizationUrl 'http://www.sensiasoftware.com' 
+    }    
+  }
+}

@@ -2,7 +2,7 @@ apply from: gradle.oshCoreDir + '/common.gradle'
 description = ''
 
 allprojects {
-  version = '0.0.0'
+  version = '0.0.1'
 }
 
 subprojects {
@@ -18,8 +18,15 @@ dependencies {
   implementation 'org.sensorhub:sensorhub-webui-core:' + oshCoreVersion
   implementation 'org.sensorhub:sensorhub-service-consys:' + oshCoreVersion
   implementation 'org.sensorhub:sensorhub-service-sweapi:' + oshCoreVersion
-  implementation project(':sensorhub-driver-template')
-
+//  implementation project(':sensorhub-driver-template')
+//  implementation project(':sensorhub-driver-simulation')
+//  implementation project(':osh-rpi-geocam')
+//  implementation project(':sensorhub-driver-pwm-servos')
+  implementation project(':sensorhub-driver-bno055')
+  implementation project(':sensorhub-driver-bno08x')
+//  implementation project(':sensorhub-driver-v4l')
+  implementation project(':sensorhub-driver-rpicam')
+//  implementation project(':sensorhub-driver-picamera')
 //  implementation project(':[storage-module-name]')
 //  implementation project(':[service-name]')
 //  implementation project(':[driver-name]')
